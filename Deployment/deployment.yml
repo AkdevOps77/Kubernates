@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-jenkins
+  namespace: qa-env
+  labels:
+    name: jenkins
+spec:
+  selector:
+    matchLabels:
+      name: jenkins
+  template:
+    metadata:
+      labels:
+        name: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:2.516
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+
+
+ 
+
